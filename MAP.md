@@ -3,32 +3,50 @@
 ## Folder Structure
 
 ```
-capsule-havoc/
-├── index.html              ← HTML shell + importmap. No game logic.
+capsule_havoc/
+├── index.html                  # HTML shell + DOM overlays (HUD, menus, banners, shop)
+├── MAP.md                      # Notes / map doc
 ├── styles/
-│   └── main.css            ← All CSS (extracted from original <style> block)
+│   └── main.css                # All styling (menu, HUD, pause, shop, panel, banners)
+├── assets/
+│   ├── images/                 # Logo / images
+│   ├── music/                  # Music tracks (theme.wav)
+│   └── sfx/                    # SFX (.wav)
 └── src/
-    ├── main.js             ← Entry point. Wires modules + starts game.
-    ├── constants.js        ← All compile-time game constants.
-    ├── state.js            ← Single mutable state object (shared runtime data).
-    ├── renderer.js         ← THREE renderer, CSS2D renderer, scene, camera, env map.
-    ├── bloom.js            ← Custom Gaussian bloom pipeline (3 layers).
-    ├── lighting.js         ← All scene lights + orbit light animation.
-    ├── terrain.js          ← Procedural chunks, prop colliders, LOS, steering.
-    ├── materials.js        ← Capsule materials, geometries, floorY, syncEnemyMats.
-    ├── player.js           ← Player mesh, health/dash bars, dash ghost, movement.
-    ├── enemies.js          ← Spawn, stagger, shooting, movement, killEnemy.
-    ├── weapons.js          ← Auto-shoot, player bullets, orbit bullets, enemy bullets.
-    ├── pickups.js          ← Coins and health packs (spawn + update).
-    ├── particles.js        ← Explosion particle pool and update.
-    ├── damageNumbers.js    ← Floating damage/heal numbers (canvas sprites).
-    ├── xp.js               ← XP system, level, weapon/enemy config accessors.
-    ├── input.js            ← Keyboard event listeners.
-    ├── loop.js             ← tick() game loop.
-    ├── gameFlow.js         ← Countdown, triggerGameOver, triggerVictory, restartGame.
-    └── panel/
-        └── index.js        ← Full control panel UI (open/close, tabs, sliders,
-                              geometry/material sync, reset, export, import).
+    ├── main.js                 # App bootstrap (menu → game, wiring, restarts)
+    ├── loop.js                 # Main game loop (update/render, wave flow, pause/shop gating)
+    ├── state.js                # Shared runtime state (paused, uiMode, wave state, coins, etc.)
+    ├── input.js                # Keyboard/mouse bindings (ESC pause, etc.)
+    ├── gameFlow.js             # Game lifecycle (countdown, game over/victory, restart)
+    ├── constants.js            # Tunables + configs (waves, weapons, etc.)
+    │
+    ├── renderer.js             # Three.js renderer/scene/camera setup
+    ├── bloom.js                # Post FX bloom pipeline
+    ├── lighting.js             # Lighting updates
+    ├── materials.js            # Shared materials/geometries helpers
+    ├── terrain.js              # Terrain + prop collision data
+    ├── particles.js            # Particle FX
+    ├── damageNumbers.js        # Damage number popups
+    │
+    ├── player.js               # Player movement + HP + visuals
+    ├── enemies.js              # Enemies (spawn/update/boss params)
+    ├── weapons.js              # Weapons + slash logic/VFX, bullet/orbit behavior
+    ├── pickups.js              # Coins/XP pickups + collection
+    ├── xp.js                   # Upgrade-derived stats (fire interval, dmg, bullet count, etc.)
+    ├── hudCoin.js              # HUD coin display logic (coin widget/animation)
+    ├── audio.js                # Music/SFX + volume routing (master/music/sfx + mixer)
+    │
+    ├── upgrades.js             # Upgrade/shop logic (overlay + purchases) 
+    ├── panel/
+    │   └── index.js            # Dev/tuning control panel
+    │
+    └── ui/                     # Menu screens (modular UI)
+        ├── menu.js
+        ├── scores.js
+        ├── highScores.js
+        ├── settings.js
+        ├── storage.js
+        └── upgrades.js         # Upgrade Shop UI (overlay)
 ```
 
 ---

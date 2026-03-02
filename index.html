@@ -33,11 +33,6 @@
       <div class="menu-eyebrow">▶ BULLET HEAVEN</div>
       <h1 class="menu-title">CAPSULE<br>HAVOC</h1>
       <div class="menu-tagline">Survive. Level up. Dominate.</div>
-      <div class="menu-controls-hint">
-        <span>WASD</span> Move &nbsp;·&nbsp;
-        <span>SHIFT</span> Dash &nbsp;·&nbsp;
-        <span>TAB</span> Settings
-      </div>
     </div>
 
     <!-- RIGHT — pages -->
@@ -105,36 +100,32 @@
 </div>
 
 
+<!-- ── XP Top Bar ── -->
+<div id="xp-hud" class="xp-topbar">
+  <div id="xp-track"><div id="xp-fill"></div></div>
+  <div id="xp-level-label">LV 0</div>
+</div>
+
 <!-- ── HUD ── -->
 <div id="ui">
   <div class="ui-panel"><span class="ui-label">Time</span><span class="ui-value" id="timer-value">00:00</span></div>
   <div class="ui-panel"><span class="ui-label">Kills</span><span class="ui-value" id="kills-value">0</span></div>
 </div>
 
-<!-- ── Coin counter ── -->
-<div id="coin-hud">
-  <div id="coin-icon"></div>
-  <span id="coin-count">0</span>
-</div>
-
-<!-- EXP Bar — top right -->
-<div id="xp-hud">
-  <div id="xp-level-row">
-    <span id="xp-level-label">LVL <span id="xp-level">0</span></span>
-    <span id="xp-values"><span id="xp-cur">0</span> / <span id="xp-next">100</span> EXP</span>
+<!-- HUD (top-left) -->
+<div id="hud-top-left">
+  <div id="coin-hud">
+    <canvas id="coin-canvas" width="28" height="28" style="width:28px;height:28px;"></canvas>
+    <span id="coin-count">0</span>
   </div>
-  <div id="xp-bar-track">
-    <div id="xp-bar-fill"></div>
+
+  <div id="fpsOverlay">FPS: <span id="fpsVal">0</span></div>
+
+  <div id="livesHud" aria-label="extra lives">
+    <span class="lives-label">LIVES:</span>
+    <span id="livesVal">0</span>
   </div>
 </div>
-
-<!-- Wave transition banner -->
-<div id="waveBanner" class="wave-banner" aria-hidden="true">
-  <div id="waveBannerText" class="wave-banner__text">WAVE 1</div>
-</div>
-
-<!-- FPS overlay -->
-<div id="fpsOverlay">FPS: <span id="fpsVal">0</span></div>
 
 <!-- ── Instructions ── -->
 <div id="instructions">WASD · SHIFT DASH · AUTO SHOOT · TAB SETTINGS</div>
@@ -153,6 +144,7 @@
       <!-- ── Page: Main ── -->
       <div class="pause-page active" id="pause-page-main">
         <button class="pause-action-btn resume"   id="pause-resume-btn">RESUME</button>
+        <button class="pause-action-btn restart"  id="pause-restart-btn">RESTART</button>
         <button class="pause-action-btn settings" id="pause-settings-btn">SETTINGS</button>
         <button class="pause-action-btn quit"     id="pause-quit-btn">QUIT TO MENU</button>
       </div>
@@ -515,6 +507,34 @@
 </script>
 
 <script type="module" src="./src/main.js"></script>
+
+
+  <!-- Wave/Boss banner (glassmorphic) -->
+  <div id="waveBanner" aria-hidden="true">
+    <div id="waveBannerInner">
+      <span id="waveBannerText">WAVE 1</span>
+    </div>
+  </div>
+
+
+  <!-- Upgrade Shop Overlay -->
+  <div id="upgradeOverlay" class="upgrade-overlay" aria-hidden="true">
+    <div class="upgrade-modal" role="dialog" aria-modal="true" aria-label="Upgrade Shop">
+      <div class="upgrade-hdr">
+        <div class="upgrade-title">UPGRADES</div>
+        <div class="upgrade-coins" title="Coins">
+          <span class="coin-icon"></span>
+          <span class="coin-count" id="upgradeCoins">0</span>
+        </div>
+      </div>
+
+      <div class="upgrade-body" id="upgradeList"></div>
+
+      <div class="upgrade-footer">
+        <button class="upgrade-continue" id="upgradeContinueBtn">CONTINUE</button>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
